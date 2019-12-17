@@ -97,7 +97,7 @@ it(<span class="hljs-string">'should cache an arbitrary number'</span>, <span cl
 
 <span class="hljs-attr">services:</span>
 <span class="hljs-attr">  myRedis:</span>
-<span class="hljs-attr">    image:</span> <span class="hljs-string">'redis:5.0.3-alpine'</span>
+<span class="hljs-attr">    image:</span> <span class="hljs-attr">redis:5.0.3-alpine</span>
 <span class="hljs-attr">    ports:</span>
 <span class="hljs-attr">      - published:</span> <span class="hljs-number">6379</span>
 <span class="hljs-attr">        target:</span> <span class="hljs-number">6379</span>
@@ -111,8 +111,6 @@ it(<span class="hljs-string">'should cache an arbitrary number'</span>, <span cl
 <span class="hljs-keyword">const</span> services = [
   {
     serviceName: <span class="hljs-string">'myRedis'</span>, <span class="hljs-comment">// Match with configuration in docker-compose.yml</span>
-    commands: [],
-    healthchecks: [],
   },
 ]
 
