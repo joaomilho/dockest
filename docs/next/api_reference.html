@@ -1,0 +1,243 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>API Reference · Dockest</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="```ts"/><meta name="docsearch:version" content="next"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="API Reference · Dockest"/><meta property="og:type" content="website"/><meta property="og:url" content="https://erikengervall.github.io/dockest/"/><meta property="og:description" content="```ts"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/dockest/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/dockest/js/scrollSpy.js"></script><link rel="stylesheet" href="/dockest/css/main.css"/><script src="/dockest/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/dockest/"><h2 class="headerTitle">Dockest</h2></a><a href="/dockest/versions"><h3>next</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/dockest/docs/next/introduction" target="_self">Docs</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Documentation</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Documentation</h3><ul class=""><li class="navListItem"><a class="navItem" href="/dockest/docs/next/introduction">Introduction</a></li><li class="navListItem"><a class="navItem" href="/dockest/docs/next/getting-started">Getting Started</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/dockest/docs/next/api_reference">API Reference</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">API Reference</h1></header><article><div><span><pre><code class="hljs css language-ts"><span class="hljs-keyword">import</span> { Dockest } <span class="hljs-keyword">from</span> <span class="hljs-string">'dockest'</span>
+
+<span class="hljs-keyword">const</span> { run } = <span class="hljs-keyword">new</span> Dockest({ opts })
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="opts-object"></a><a href="#opts-object" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>opts [object]</h2>
+<p><code>opts</code> is optional, i.e. the dockest constructor can be called without arguments.</p>
+<h3><a class="anchor" aria-hidden="true" id="aftersetupsleep-number"></a><a href="#aftersetupsleep-number" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>afterSetupSleep</code> [number]</h3>
+<p>Default: <code>0</code></p>
+<p>Additional sleep after initial setup. Useful when services require additional time to boot and there's no applicable healthcheck</p>
+<h3><a class="anchor" aria-hidden="true" id="composefile-string"></a><a href="#composefile-string" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>composeFile</code> [string]</h3>
+<p>Default: <code>'docker-compose.yml'</code></p>
+<p>Compose file(s) with services to use while running tests</p>
+<h3><a class="anchor" aria-hidden="true" id="composeopts-object"></a><a href="#composeopts-object" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>composeOpts</code> [object]</h3>
+<p>Default:</p>
+<pre><code class="hljs css language-ts">{
+  alwaysRecreateDeps: <span class="hljs-literal">false</span>,
+  build: <span class="hljs-literal">false</span>,
+  forceRecreate: <span class="hljs-literal">false</span>,
+  noBuild: <span class="hljs-literal">false</span>,
+  noColor: <span class="hljs-literal">false</span>,
+  noDeps: <span class="hljs-literal">false</span>,
+  noRecreate: <span class="hljs-literal">false</span>,
+  quietPull: <span class="hljs-literal">false</span>,
+}
+</code></pre>
+<p>Forwards options to <code>docker-compose up</code>, <a href="https://docs.docker.com/compose/reference/up/">Docker's docs</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="composeoptsalwaysrecreatedeps-boolean"></a><a href="#composeoptsalwaysrecreatedeps-boolean" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>composeOpts.alwaysRecreateDeps</code> [boolean]</h3>
+<p>Default: <code>false</code></p>
+<p>Recreate dependent containers. Incompatible with --no-recreate</p>
+<h3><a class="anchor" aria-hidden="true" id="composeoptsbuild-boolean"></a><a href="#composeoptsbuild-boolean" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>composeOpts.build</code> [boolean]</h3>
+<p>Default: <code>false</code></p>
+<p>Build images before starting containers</p>
+<h3><a class="anchor" aria-hidden="true" id="composeoptsforcerecreate-boolean"></a><a href="#composeoptsforcerecreate-boolean" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>composeOpts.forceRecreate</code> [boolean]</h3>
+<p>Default: <code>false</code></p>
+<p>Recreate containers even if their configuration and image haven't changed</p>
+<h3><a class="anchor" aria-hidden="true" id="composeoptsnobuild-boolean"></a><a href="#composeoptsnobuild-boolean" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>composeOpts.noBuild</code> [boolean]</h3>
+<p>Default: <code>false</code></p>
+<p>Don't build an image, even if it's missing</p>
+<h3><a class="anchor" aria-hidden="true" id="composeoptsnocolor-boolean"></a><a href="#composeoptsnocolor-boolean" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>composeOpts.noColor</code> [boolean]</h3>
+<p>Default: <code>false</code></p>
+<p>Produce monochrome output</p>
+<h3><a class="anchor" aria-hidden="true" id="composeoptsnodeps-boolean"></a><a href="#composeoptsnodeps-boolean" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>composeOpts.noDeps</code> [boolean]</h3>
+<p>Default: <code>false</code></p>
+<p>Don't start linked services</p>
+<h3><a class="anchor" aria-hidden="true" id="composeoptsnorecreate-boolean"></a><a href="#composeoptsnorecreate-boolean" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>composeOpts.noRecreate</code> [boolean]</h3>
+<p>Default: <code>false</code></p>
+<p>If containers already exist, don't recreate them. Incompatible with --force-recreate and -V</p>
+<h3><a class="anchor" aria-hidden="true" id="composeoptsquietpull-boolean"></a><a href="#composeoptsquietpull-boolean" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>composeOpts.quietPull</code> [boolean]</h3>
+<p>Default: <code>false</code></p>
+<p>Pull without printing progress information</p>
+<h3><a class="anchor" aria-hidden="true" id="debug-boolean"></a><a href="#debug-boolean" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>debug</code> [boolean]</h3>
+<p>Default: <code>false</code></p>
+<p>Pauses Dockest just before executing Jest. Useful for more rapid development using Jest manually</p>
+<h3><a class="anchor" aria-hidden="true" id="dumperrors-boolean"></a><a href="#dumperrors-boolean" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>dumpErrors</code> [boolean]</h3>
+<p>Default: <code>false</code></p>
+<p>Serializes errors and dumps them in <code>dockest-error.json</code>. Useful for debugging.</p>
+<h3><a class="anchor" aria-hidden="true" id="exithandler-function"></a><a href="#exithandler-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>exitHandler</code> [function]</h3>
+<p>Default: <code>null</code></p>
+<p>Callback that will run before exit. Received one argument of type { type: string, code?: number, signal?: any, error?: Error, reason?: any, p?: any }</p>
+<h3><a class="anchor" aria-hidden="true" id="jestlib-object"></a><a href="#jestlib-object" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>jestLib</code> [object]</h3>
+<p>Default: <code>require</code>('jest')</p>
+<pre><code class="hljs">The Jest library itself, typically passed as { lib: require('jest') }. If omitted, Dockest will attempt to require Jest from your application's dependencies. If absent, Dockest will use it's own version.
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="jestopts-object"></a><a href="#jestopts-object" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>jestOpts</code> [object]</h3>
+<p>Default: <code>{}</code></p>
+<pre><code class="hljs">Jest's CLI options, an exhaustive list of CLI-options can be found in [Jest's](https://jestjs.io/docs/en/cli.html) documentation
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="loglevel-object"></a><a href="#loglevel-object" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>logLevel</code> [object]</h3>
+<p>Default: <code>logLevel</code>.NORMAL</p>
+<pre><code class="hljs">Decides how much logging will occur. Each level represents a number ranging from 0-4
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="runinband-boolean"></a><a href="#runinband-boolean" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>runInBand</code> [boolean]</h3>
+<p>Default: <code>true</code></p>
+<p>Initializes and runs the Runners in sequence. Disabling this could increase performance</p>
+<p><em>Note: Jest runs tests in parallel per default, which is why Dockest defaults <code>runInBand</code> to <code>true</code>. This will cause jest to run sequentially in order to avoid race conditions for I/O operations. This may lead to longer runtimes.</em></p>
+<h2><a class="anchor" aria-hidden="true" id="run-function"></a><a href="#run-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>run</code> [function]</h2>
+<!-- TODO: Move this to a seperate page -->
+<pre><code class="hljs css language-ts"><span class="hljs-keyword">import</span> { Dockest } <span class="hljs-keyword">from</span> <span class="hljs-string">'dockest'</span>
+
+<span class="hljs-keyword">const</span> { run } = <span class="hljs-keyword">new</span> Dockest()
+
+<span class="hljs-keyword">const</span> dockestServices = [
+  {
+    serviceName: <span class="hljs-string">'service1'</span>,
+    commands: [<span class="hljs-string">'echo "Hello name1 🌊"'</span>],
+    dependents: [
+      {
+        serviceName: <span class="hljs-string">'service2'</span>,
+      },
+    ],
+    healthcheck: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">Promise</span>.resolve(), <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Update docs</span>
+  },
+]
+
+run(dockestServices)
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="dockestservice"></a><a href="#dockestservice" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>dockestService</h2>
+<p>Dockest services are meant to map to services declared in the Compose file(s)</p>
+<h3><a class="anchor" aria-hidden="true" id="dockestservicename-string"></a><a href="#dockestservicename-string" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>dockestService.name</code> [string]</h3>
+<p><strong>Required</strong></p>
+<p>Default: <code>-</code></p>
+<p>Service name that matches the corresponding service in your Compose file</p>
+<h3><a class="anchor" aria-hidden="true" id="dockestservicecommands-string"></a><a href="#dockestservicecommands-string" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>dockestService.commands</code> [string[]]</h3>
+<p>Default: <code>[]</code></p>
+<p>Bash scripts that will run once the service is ready. E.g. database migrations.</p>
+<h3><a class="anchor" aria-hidden="true" id="dockestservicedependents-dockestservice"></a><a href="#dockestservicedependents-dockestservice" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>dockestService.dependents</code> [DockestService[]]</h3>
+<p>Default: <code>[]</code></p>
+<p><code>dependents</code> are Dockest services that are are dependent on the parent service.</p>
+<p>For example, the following code</p>
+<pre><code class="hljs css language-ts"><span class="hljs-keyword">const</span> dockestServices = [
+  {
+    serviceName: <span class="hljs-string">'service1'</span>,
+    dependents: [
+      {
+        serviceName: <span class="hljs-string">'service2'</span>,
+      },
+    ],
+  },
+]
+</code></pre>
+<p>will ensure that <code>service1</code> starts up and is fully responsive before even attempting to start <code>service2</code>.</p>
+<blockquote>
+<p>Why not rely on the Docker File service configuration options <code>depends_on</code>?</p>
+</blockquote>
+<p><a href="https://docs.docker.com/compose/compose-file/#depends_on">Docker's docs</a> explains this very neatly:</p>
+<pre><code class="hljs css language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">'3.7'</span>
+<span class="hljs-attr">services:</span>
+<span class="hljs-attr">  web:</span>
+<span class="hljs-attr">    build:</span> <span class="hljs-string">.</span>
+<span class="hljs-attr">    depends_on:</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">db</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">redis</span>
+<span class="hljs-attr">  redis:</span>
+<span class="hljs-attr">    image:</span> <span class="hljs-string">redis</span>
+<span class="hljs-attr">  db:</span>
+<span class="hljs-attr">    image:</span> <span class="hljs-string">postgres</span>
+</code></pre>
+<blockquote>
+<p><code>depends_on</code> does not wait for <code>db</code> and <code>redis</code> to be “ready” before starting <code>web</code> - only until they have been started.</p>
+</blockquote>
+<h3><a class="anchor" aria-hidden="true" id="dockestservicehealthcheck-function"></a><a href="#dockestservicehealthcheck-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>dockestService.healthcheck</code> [function]</h3>
+<p>Default: <code>() =&gt; Promise.resolve()</code></p>
+<p>The Dockest Service's healthcheck function is there to determine the service's health (or responsiveness) by e.g.,
+E.g. responsiveness checking a database using <code>select 1</code>. The healthcheck function receive the corresponding Compose service configuration from the Compose file as first argument and the containerId as the second.</p>
+<p>The healthcheck takes a single argument in form of an object.</p>
+<pre><code class="hljs css language-ts"><span class="hljs-keyword">const</span> dockestServices = [
+  {
+    serviceName: <span class="hljs-string">'service1'</span>,
+    healthcheck: ({
+      containerId,
+      defaultHealthchecks: { postgres, redis, web },
+      dockerComposeFileService: { ports },
+      logger,
+    }) =&gt; {
+      <span class="hljs-comment">// ...</span>
+    },
+  },
+]
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="containerid"></a><a href="#containerid" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>containerId</h4>
+<p>The Docker <a href="https://docs.docker.com/engine/reference/run/#container-identification">container's id</a>.</p>
+<h4><a class="anchor" aria-hidden="true" id="defaulthealthchecks"></a><a href="#defaulthealthchecks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>defaultHealthchecks</h4>
+<p>Dockest exposes a few default healthchecks that developers can use. These are plug-and-play async functions that will attempt to establish responsiveness towards a service.</p>
+<h4><a class="anchor" aria-hidden="true" id="dockercomposefileservice"></a><a href="#dockercomposefileservice" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>dockerComposeFileService</h4>
+<p>This is an object representation of your service's information from the Compose file.</p>
+<h4><a class="anchor" aria-hidden="true" id="logger"></a><a href="#logger" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>logger</h4>
+<p>An instance, specific to this particular Dockest Service (internally known as Runner), of the internal Dockest logger. Using this logger will prettify and contextualize logs with e.g. the serviceName.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/dockest/docs/next/getting-started"><span class="arrow-prev">← </span><span>Getting Started</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#opts-object">opts [object]</a><ul class="toc-headings"><li><a href="#aftersetupsleep-number"><code>afterSetupSleep</code> [number]</a></li><li><a href="#composefile-string"><code>composeFile</code> [string]</a></li><li><a href="#composeopts-object"><code>composeOpts</code> [object]</a></li><li><a href="#composeoptsalwaysrecreatedeps-boolean"><code>composeOpts.alwaysRecreateDeps</code> [boolean]</a></li><li><a href="#composeoptsbuild-boolean"><code>composeOpts.build</code> [boolean]</a></li><li><a href="#composeoptsforcerecreate-boolean"><code>composeOpts.forceRecreate</code> [boolean]</a></li><li><a href="#composeoptsnobuild-boolean"><code>composeOpts.noBuild</code> [boolean]</a></li><li><a href="#composeoptsnocolor-boolean"><code>composeOpts.noColor</code> [boolean]</a></li><li><a href="#composeoptsnodeps-boolean"><code>composeOpts.noDeps</code> [boolean]</a></li><li><a href="#composeoptsnorecreate-boolean"><code>composeOpts.noRecreate</code> [boolean]</a></li><li><a href="#composeoptsquietpull-boolean"><code>composeOpts.quietPull</code> [boolean]</a></li><li><a href="#debug-boolean"><code>debug</code> [boolean]</a></li><li><a href="#dumperrors-boolean"><code>dumpErrors</code> [boolean]</a></li><li><a href="#exithandler-function"><code>exitHandler</code> [function]</a></li><li><a href="#jestlib-object"><code>jestLib</code> [object]</a></li><li><a href="#jestopts-object"><code>jestOpts</code> [object]</a></li><li><a href="#loglevel-object"><code>logLevel</code> [object]</a></li><li><a href="#runinband-boolean"><code>runInBand</code> [boolean]</a></li></ul></li><li><a href="#run-function"><code>run</code> [function]</a></li><li><a href="#dockestservice">dockestService</a><ul class="toc-headings"><li><a href="#dockestservicename-string"><code>dockestService.name</code> [string]</a></li><li><a href="#dockestservicecommands-string"><code>dockestService.commands</code> [string[]]</a></li><li><a href="#dockestservicedependents-dockestservice"><code>dockestService.dependents</code> [DockestService[]]</a></li><li><a href="#dockestservicehealthcheck-function"><code>dockestService.healthcheck</code> [function]</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/dockest/" class="nav-home"></a><div><a href="https://github.com/erikengervall/dockest">GitHub</a><a class="github-button" href="https://github.com/erikengervall/dockest" data-icon="octicon-star" data-count-href="/erikengervall/dockest" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div><div style="text-align:right"><img alt="licence" src="https://github.com/erikengervall/dockest/workflows/Node.js%20CI/badge.svg"/><a href="https://www.npmjs.com/package/dockest"><img alt="npm downloads" src="https://img.shields.io/npm/dm/dockest.svg"/></a><a href="https://github.com/erikengervall/dockest/blob/master/LICENSE"><img alt="licence" src="https://img.shields.io/npm/l/dockest.svg"/></a><a href="https://www.npmjs.com/package/dockest?activeTab=versions"><img alt="npm" src="https://img.shields.io/npm/v/dockest"/></a><a href="https://snyk.io/test/github/erikengervall/dockest"><img alt="snyk" src="https://snyk.io/test/github/erikengervall/dockest/badge.svg"/></a></div></section><section class="copyright">Copyright © 2020 Erik Engervall</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '9bf9f3d6b00b633293ccea7bbd73a7d1',
+                indexName: 'dockest',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {}
+              });
+            </script></body></html>
