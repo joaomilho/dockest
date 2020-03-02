@@ -54,7 +54,7 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Run</h1></header><article><div><span><pre><code class="hljs css language-ts"><span class="hljs-keyword">import</span> { Dockest } <span class="hljs-keyword">from</span> <span class="hljs-string">'dockest'</span>
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Run</h1></header><article><div><span><pre><code class="hljs css language-ts"><span class="hljs-keyword">import</span> { Dockest } <span class="hljs-keyword">from</span> <span class="hljs-string">'dockest'</span>
 
 <span class="hljs-keyword">const</span> { run } = <span class="hljs-keyword">new</span> Dockest()
 
@@ -113,15 +113,15 @@ run(dockestServices)
 <p><a href="https://docs.docker.com/compose/compose-file/#depends_on">Docker's docs</a> explains this very neatly:</p>
 <pre><code class="hljs css language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">'3.7'</span>
 <span class="hljs-attr">services:</span>
-<span class="hljs-attr">  web:</span>
-<span class="hljs-attr">    build:</span> <span class="hljs-string">.</span>
-<span class="hljs-attr">    depends_on:</span>
-<span class="hljs-bullet">      -</span> <span class="hljs-string">db</span>
-<span class="hljs-bullet">      -</span> <span class="hljs-string">redis</span>
-<span class="hljs-attr">  redis:</span>
-<span class="hljs-attr">    image:</span> <span class="hljs-string">redis</span>
-<span class="hljs-attr">  db:</span>
-<span class="hljs-attr">    image:</span> <span class="hljs-string">postgres</span>
+  <span class="hljs-attr">web:</span>
+    <span class="hljs-attr">build:</span> <span class="hljs-string">.</span>
+    <span class="hljs-attr">depends_on:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">db</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">redis</span>
+  <span class="hljs-attr">redis:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">redis</span>
+  <span class="hljs-attr">db:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">postgres</span>
 </code></pre>
 <blockquote>
 <p><code>depends_on</code> does not wait for <code>db</code> and <code>redis</code> to be “ready” before starting <code>web</code> - only until they have been started.</p>
@@ -164,15 +164,15 @@ configuration from the Compose file as first argument and the containerId as the
 <span class="hljs-attr">version:</span> <span class="hljs-string">'3.7'</span>
 
 <span class="hljs-attr">services:</span>
-<span class="hljs-attr">  postgres:</span> <span class="hljs-comment"># (1)</span>
-<span class="hljs-attr">    image:</span> <span class="hljs-attr">postgres:9.6-alpine</span>
-<span class="hljs-attr">    ports:</span>
-<span class="hljs-attr">      - published:</span> <span class="hljs-number">5432</span>
-<span class="hljs-attr">        target:</span> <span class="hljs-number">5432</span>
-<span class="hljs-attr">    environment:</span> <span class="hljs-comment"># (2)</span>
-<span class="hljs-attr">      POSTGRES_DB:</span> <span class="hljs-string">baby</span>
-<span class="hljs-attr">      POSTGRES_USER:</span> <span class="hljs-string">dont</span>
-<span class="hljs-attr">      POSTGRES_PASSWORD:</span> <span class="hljs-string">hurtme</span>
+  <span class="hljs-attr">postgres:</span> <span class="hljs-comment"># (1)</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">postgres:9.6-alpine</span>
+    <span class="hljs-attr">ports:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">published:</span> <span class="hljs-number">5432</span>
+        <span class="hljs-attr">target:</span> <span class="hljs-number">5432</span>
+    <span class="hljs-attr">environment:</span> <span class="hljs-comment"># (2)</span>
+      <span class="hljs-attr">POSTGRES_DB:</span> <span class="hljs-string">baby</span>
+      <span class="hljs-attr">POSTGRES_USER:</span> <span class="hljs-string">dont</span>
+      <span class="hljs-attr">POSTGRES_PASSWORD:</span> <span class="hljs-string">hurtme</span>
 </code></pre>
 <pre><code class="hljs css language-ts"><span class="hljs-comment">// dockest.ts</span>
 <span class="hljs-keyword">import</span> { Dockest } <span class="hljs-keyword">from</span> <span class="hljs-string">'dockest'</span>
@@ -197,11 +197,11 @@ run([
 <span class="hljs-attr">version:</span> <span class="hljs-string">'3.7'</span>
 
 <span class="hljs-attr">services:</span>
-<span class="hljs-attr">  redis:</span> <span class="hljs-comment"># (1)</span>
-<span class="hljs-attr">    image:</span> <span class="hljs-attr">redis:5.0.3-alpine</span>
-<span class="hljs-attr">    ports:</span>
-<span class="hljs-attr">      - published:</span> <span class="hljs-number">6379</span>
-<span class="hljs-attr">        target:</span> <span class="hljs-number">6379</span>
+  <span class="hljs-attr">redis:</span> <span class="hljs-comment"># (1)</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">redis:5.0.3-alpine</span>
+    <span class="hljs-attr">ports:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">published:</span> <span class="hljs-number">6379</span>
+        <span class="hljs-attr">target:</span> <span class="hljs-number">6379</span>
 </code></pre>
 <pre><code class="hljs css language-ts"><span class="hljs-comment">// dockest.ts</span>
 <span class="hljs-keyword">import</span> { Dockest } <span class="hljs-keyword">from</span> <span class="hljs-string">'dockest'</span>
